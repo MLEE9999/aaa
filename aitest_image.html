@@ -96,7 +96,7 @@ h1 small {
 <div>Teachable Machine Image Model</div>
 
 <button type="button" onclick="init()">Start</button>
-<button type="button" onclick="predict()"> 예측 </button>
+<!--<button type="button" onclick="predict()"> 예측 </button>-->
 <!-- 이곳에 뷰가 나타난다.-->
 <!--<div id="webcam-container"></div> -->
 <div id="label-container"></div>
@@ -123,6 +123,7 @@ h1 small {
         for (let i = 0; i < maxPredictions; i++) { // and class labels
             labelContainer.appendChild(document.createElement("div"));
         }
+        await predict();
     }
 
     async function predict() {
