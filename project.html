@@ -2,13 +2,24 @@
 <html lang="en" >  
 <head>
   <meta charset="utf-8">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <style>
     @font-face {
       font-family: maple;
       src: url(Maplestory\ Light.ttf);
     }
-    body {
-  background: whitesmoke;
+ head{
+   background:black;
+ }
+  body {
+  padding-top:50px;
+  
+  background-image: url("별빛.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  
   font-family: 'maple', sans-serif;
   text-align: center;
 }
@@ -17,6 +28,18 @@
   max-width: 960px;
   margin: 30px auto;
   padding: 20px;
+}
+.abcde{
+  background-color: white;
+  padding: 30px;
+  margin-left:100px ;
+  margin-right:100px;
+  height: 900px;
+  font-size: 50px;
+  font-weight: bold;
+  text-align: center;
+  background-color: #ffffff;
+  background-color: rgba( 255, 255, 255, 0.75 );
 }
 h1 {
   font-size: 30px;
@@ -29,9 +52,10 @@ h1 small {
   padding-top: 8px;
   color: gray;
   text-align: right;
-  bottom:0;
+  bottom:-1;
   position: absolute;
 }
+
 .avatar-upload {
   position: relative;
   max-width: 205px;
@@ -47,8 +71,8 @@ h1 small {
 }
 .avatar-edit input + label {
   display: inline-block;
-  width: 100px;
-  height: 34px;
+  width: 50px;
+  height: 50px;
   margin-bottom: 0;
   background: #769dca;
   border: 1px solid transparent;
@@ -90,6 +114,7 @@ h1 small {
   border: none;
   border-radius: 15px;
   box-shadow: 0 9px #999;
+  
 }
 
 .button:hover {background-color: #3e8e41}
@@ -113,10 +138,6 @@ h1 small {
   <body translate="no" >
 
 
-<!--<button type="button" onclick="predict()"> 예측 </button>-->
-<!-- 이곳에 뷰가 나타난다.-->
-<!--<div id="webcam-container"></div> -->
-
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
 <script type="text/javascript">
@@ -130,13 +151,13 @@ h1 small {
 
     // Load the image model and setup the webcam
     async function init() {
-        var nones = document.getElementById('imagePreview')
+        var nones = document.getElementById('#imagePreview')
         Axplain = document.getElementById('explain');
         
-        if(!nones){
-          Axplain.innerText = "사진이 없습니다.";
-          return;
-        }
+        // if($('#imagePreview').val() == ""){
+        //  Axplain.innerText = "사진이 없습니다.";
+        //  return;
+        // }
         const modelURL = URL + "model.json";
         const metadataURL = URL + "metadata.json";
         
@@ -160,27 +181,49 @@ h1 small {
         var image = document.getElementById('imagePreview')
         const prediction = await model.predict(image, false);
         for (let i = 0; i < maxPredictions; i++) {
-            const classPrediction =
-                prediction[i].className + ": " + prediction[i].probability.toFixed(2);
-            labelContainer.childNodes[i].innerHTML = classPrediction;
+            // const classPrediction =
+            //     prediction[i].className + ": " + prediction[i].probability.toFixed(2)*100+"%";
+            // labelContainer.childNodes[i].innerHTML = classPrediction;
             if (prediction[i].probability > bestPrediction) {
                 bestPrediction = prediction[i].probability
                 bestPredictionIdx = i
             }
         }
-        if(prediction[bestPredictionIdx].className == "포도")
-         airesult.innerText ="하루의 처음과 끝에서 길흉이 반전되는 운수입니다. 종일 불안하고 ..";
-        else
-         airesult.innerText ="아웃";
+        if(prediction[bestPredictionIdx].className == "물병자리")
+         airesult.innerText ="물병";
+        else if(prediction[bestPredictionIdx].className == "물고기자리")
+         airesult.innerText ="물고기";
+         else if(prediction[bestPredictionIdx].className == "양자리")
+         airesult.innerText ="양";
+         else if(prediction[bestPredictionIdx].className == "황소자리")
+         airesult.innerText ="황소";
+         else if(prediction[bestPredictionIdx].className == "쌍둥이자리")
+         airesult.innerText ="쌍둥이";
+         else if(prediction[bestPredictionIdx].className == "게자리")
+         airesult.innerText ="게";
+         else if(prediction[bestPredictionIdx].className == "사자자리")
+         airesult.innerText ="사자";
+         else if(prediction[bestPredictionIdx].className == "처녀자리")
+         airesult.innerText ="처녀";
+         else if(prediction[bestPredictionIdx].className == "천칭자리")
+         airesult.innerText ="천칭";
+         else if(prediction[bestPredictionIdx].className == "전갈자리")
+         airesult.innerText ="전갈";
+         else if(prediction[bestPredictionIdx].className == "사수자리")
+         airesult.innerText ="사수";
+         else if(prediction[bestPredictionIdx].className == "염소자리")
+         airesult.innerText ="염소";
+         
     }
 
 </script>
+<div class="abcde">
 <div class="webcam-container">
     <h1>운세 
     </h1>
     <div class="avatar-upload">
         <div class="avatar-preview">
-              <img src="" id="imagePreview">
+              <img src="물음표.jpg" id="imagePreview">
             </div>
         </div>
     </div>
@@ -188,15 +231,14 @@ h1 small {
         <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
         <label for="imageUpload"></label>
     </div>
-</div>
-<h1 id="explain">이미지를 넣어주세요</h1>
 
+<h1 id="explain">이미지를 넣어주세요</h1>
 <button class= "button" id= "aa" type="button" onclick="init()">운세 보기</button>
 <h1></h1>
 <div id="label-container"></div>
 <div id="ai-result"></div>
-<h1>
-<small>제작자 - 이은수</small></h1>
+</div>
+<h1><small>제작자 - 이은수</small></h1>
 </script>
     <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-1b93190375e9ccc259df3a57c1abc0e64599724ae30d7ea4c6877eb615f89387.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
@@ -213,7 +255,6 @@ h1 small {
         reader.readAsDataURL(input.files[0]);
     }
     }
-  
 $("#imageUpload").change(function() {
     readURL(this);
 });
