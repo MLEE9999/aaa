@@ -140,6 +140,32 @@ max-width: 1000px;
   
   transform: translateY(2px);
 }
+.previousa {
+ text-decoration: none;
+  display: inline-block;
+  padding: 8px 10px;
+  border-radius: 100%;
+  margin-left:100px ;
+  background-color: #f1f1f1;
+  background-color: rgba( 255, 255, 255, 0.45 );
+  color: rgb(46, 46, 46);
+  position: absolute;
+  font-size: 10px;
+  bottom: 7%;
+  left:1.5%;
+  visibility: hidden;
+  outline: none;
+  border:none;
+  cursor:pointer;
+}
+
+.previousa:hover{
+  background-color: rgb(167, 167, 167);
+}
+.previousa:active{
+  
+  transform: translateY(2px);
+}
 h1 {
   font-size: 50px;
   text-align: center;
@@ -281,7 +307,7 @@ h1 small {
     const URL = "./unse/";
 
     let model, webcam, labelContainer, maxPredictions, airesult, starbridge, Axplain;
-
+    let a;
     // Load the image model and setup the webcam
     async function init() {
         var nones = document.getElementById('imagePreview')
@@ -310,18 +336,19 @@ h1 small {
        
       let bestPrediction = 0;
         let bestPredictionIdx = 0;
-
+        a="별자리 정보\n";
         var image = document.getElementById('imagePreview')
         const prediction = await model.predict(image, false);
         for (let i = 0; i < maxPredictions; i++) {
-            // const classPrediction =
-            //     prediction[i].className + ": " + prediction[i].probability.toFixed(2)*100+"%";
-            // labelContainer.childNodes[i].innerHTML = classPrediction;
+             const classPrediction =
+                 prediction[i].className + ": " + prediction[i].probability.toFixed(2)*100+"%";
+             a += classPrediction+"\n";
             if (prediction[i].probability > bestPrediction) {
                 bestPrediction = prediction[i].probability
                 bestPredictionIdx = i
             }
         }
+        document.all.adp.style.visibility="visible";
         starbridge.innerText="이 그림의 별자리 운세는 "+prediction[bestPredictionIdx].className+" 입니다.\n\n";
         if(prediction[bestPredictionIdx].className == "물병자리")
         
@@ -378,11 +405,17 @@ h1 small {
       alert("안녕하세요 별자리 운세입니다.\n중앙에 있는 공백에 그림을 넣어 운세를 확인하세요.");
       alert("1. 동그라미 버튼을 눌러 넣을 이미지를 선택합니다.\n\n"+
       "2. 이미지를 선택한 뒤 [운세 보기] 버튼을 눌러줍니다.\n\n"+
-      "3. 잠시 뒤 선택한 그림의 운세와 이야기가 나옵니다.");
+      "3. 잠시 뒤 선택한 그림의 운세와 이야기가 나옵니다.\n\n"+
+      "4. 그림에 대한 별자리 지분을 확인하려면 왼쪽 아래 ! 버튼을 눌러주세요");
     }
+    async function percent(){
+      alert(a);
+    }
+    
 </script>
 <div class="abcde">
-  <a href="#" class="previous round" id="ap" onclick="example_2()">?</a>
+  <a href="#" class="previous" id="ap" onclick="example_2()">?</a>
+  <button class="previousa" id="adp" value="별자리 정보" onclick="percent()" >!</button>
 <div class="webcam-container">
     <h1>별자리 운세 </h1>
     <div class="garo">
