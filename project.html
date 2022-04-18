@@ -12,7 +12,9 @@
  }
   body {
   padding-top:50px;
-  
+  min-width: 1000px;
+  min-height: 1000px;
+max-width: 1000px;
   background-image: url("별빛.jpg");
   background-size: cover;
   background-repeat: no-repeat;
@@ -32,12 +34,14 @@
   font-size: 1em;
   font-size: 22px;
   line-height: 1em;
-  margin: 15px 40px;
+  margin: 55px 45px 25px 35px;
+  right: 40px;
   outline: none;
   padding: 12px 40px 10px;
   position: relative;
   text-transform: uppercase;
   font-weight: 700;
+  
 }
 .snip1535:before,
 .snip1535:after {
@@ -77,6 +81,23 @@
   height: 100%;
   width: 100%;
 }
+.snip1535 input{
+  display: none;
+}
+.snip1535 label{
+  font-size: 19px;
+}
+.snip1535 input + label {
+  z-index: 2;
+  cursor: pointer;
+}
+.garo {
+  display:flex;
+}
+.sero{
+  position:relative;
+  margin-top: 20%;
+}
 .container {
   max-width: 960px;
   margin: 30px auto;
@@ -85,8 +106,8 @@
 .abcde{
   background-color: white;
   padding: 30px;
-  margin-left:100px ;
-  margin-right:100px;
+  margin-left:10% ;
+  margin-right:10%;
   height: 790px;
   font-size: 50px;
   font-weight: bold;
@@ -136,31 +157,33 @@ h1 small {
   margin: 50px auto;
 }
 .avatar-edit {
-  position: fixed; 
   right: 30%;
   top:57%;
+  text-align: center;
+  line-height: 100%;
+  margin-right:95px;
 }
 .avatar-edit input {
   display: none;
-  
 }
 .avatar-edit label{
   color:white;
-  font-size: 10px;
+  
+  font-size:20px;
 }
 .avatar-edit input + label {
   display: inline-block;
-  
-  width: 50px;
-  height: 50px;
+  text-align: center;
+  top:58%;
+  width: 170px;
+  height: 45px;
   margin-bottom: 0;
-  background: #aab8f5;
+  background: #6981f0;
   border: 1px solid transparent;
   box-shadow: 2px 2px 2px 2px rgba(60, 96, 204, 0.5);
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   position : relative;
-  border-radius: 100%;
 }
 .avatar-edit input + label:active{
   background-color: rgba(60, 96, 204, 0.5);
@@ -168,9 +191,7 @@ h1 small {
   transform: translateY(6px);
 }
 .avatar-edit input + label:hover{
-  
   background-color: rgba(60, 96, 204, 0.5);
-
 }
 .avatar-upload .avatar-preview {
   width: 300px;
@@ -212,6 +233,7 @@ h1 small {
   transform: translateY(4px);
 }
     </style>
+
     <script>$(document).ready(function() {
       $(".title").lettering();
       $(".button").lettering();
@@ -329,24 +351,24 @@ h1 small {
     }
 </script>
 <div class="abcde">
-<a href="#" class="previous round" id="ap" onclick="example_2()">?</a>
+  <a href="#" class="previous round" id="ap" onclick="example_2()">?</a>
 <div class="webcam-container">
-    <h1>운세 
-    </h1>
+    <h1>운세 </h1>
+    <div class="garo">
     <div class="avatar-upload">
         <div class="avatar-preview">
               <img src="물음표.jpg" id="imagePreview">
             </div>
         </div>
-    </div>
+    
+    <div class="sero">
     <div class="avatar-edit">
         <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
-        <label for="imageUpload"></label>
+        <label for="imageUpload">이미지 삽입</label>
     </div>
 
-<div>
-<h1 id="explain">이미지를 넣어주세요</h1></div>
-<button class= "snip1535" id= "aa" type="button" onclick="init()">운세 보기</button>
+<button class= "snip1535" id= "aa" type="button" onclick="init()">운세 보기</button></div>
+</div></div>
 <h1></h1>
 <div id="label-container"></div>
 <div id="ai-result"></div>
